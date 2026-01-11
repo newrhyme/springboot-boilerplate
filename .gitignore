@@ -37,6 +37,6 @@ out/
 .vscode/
 
 # application yml (환경별)
+application.yml
 application-local.yml
 application-dev.yml
-application-prod.yml

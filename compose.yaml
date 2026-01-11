@@ -2,6 +2,7 @@ services:
   mysql:
     image: mysql:8.0
     container_name: boilerplate-mysql
+    profiles: ["local-mysql"]
     environment:
       MYSQL_DATABASE: 'boilerplate'
       MYSQL_USER: 'boilerplate'
@@ -23,6 +24,7 @@ services:
   postgres:
     image: postgres:15
     container_name: boilerplate-postgres
+    profiles: ["local-postgres"]
     environment:
       POSTGRES_DB: 'boilerplate'
       POSTGRES_USER: 'boilerplate'
