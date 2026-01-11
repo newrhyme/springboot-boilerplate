@@ -1,6 +1,10 @@
 spring:
   profiles:
-    default: local
+    default: local-mysql
+
+  docker:
+    compose:
+      enabled: false
 
 server:
   port: 8080

@@ -1,0 +1,26 @@
+spring:
+  config:
+    activate:
+      on-profile: local-postgres
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/boilerplate
+    username: "boilerplate"
+    password: "000624"
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: true
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+
+app:
+  profile-name: local-postgres
