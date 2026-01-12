@@ -48,7 +48,7 @@ public class SecurityConfig {
                         .requestMatchers(SWAGGER_WHITELIST).permitAll()
                         .requestMatchers("/actuator/health").permitAll()
                         .requestMatchers("/api/v1/sample/**").permitAll()
-                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("/api/v1/auth/**", "/health").permitAll()
                         .anyRequest().authenticated()
                 )
 //         필요하면 여기에 entryPoint / accessDeniedHandler 설정
