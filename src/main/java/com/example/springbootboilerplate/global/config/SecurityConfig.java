@@ -23,6 +23,12 @@ public class SecurityConfig {
     private final JwtProvider jwtProvider;
     private final UserRepository userRepository;
 
+    private final String[] SWAGGER_WHITELIST = {
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/swagger-ui.html"
+    };
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -39,6 +45,7 @@ public class SecurityConfig {
                 .formLogin(fl -> fl.disable())
                 .httpBasic(hb -> hb.disable())
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(SWAGGER_WHITELIST).permitAll()
                         .requestMatchers("/actuator/health").permitAll()
                         .requestMatchers("/api/v1/sample/**").permitAll()
                         .requestMatchers("/api/v1/auth/**").permitAll()
