@@ -1,6 +1,7 @@
 package com.example.springbootboilerplate.global.exception;
 
 import com.example.springbootboilerplate.global.common.code.ErrorCode;
+import com.example.springbootboilerplate.global.common.code.GlobalErrorCode;
 import com.example.springbootboilerplate.global.common.response.ErrorResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -22,7 +23,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, errorCode.getHttpStatus());
     }
 
-    // MethodArgumentNotValidException 처리
+    // Validation 처리
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidation(MethodArgumentNotValidException e) {
         // 필드별 오류 메시지 맵 생성
@@ -33,18 +34,21 @@ public class GlobalExceptionHandler {
             fieldErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
         }
 
+        ErrorCode errorCode = GlobalErrorCode.VALIDATION_ERROR;
+
         // 응답 생성 및 반환
         return ResponseEntity
-                .status(ErrorCode.VALIDATION_ERROR.getHttpStatus())
-                .body(ErrorResponse.of(ErrorCode.VALIDATION_ERROR, fieldErrors));
+                .status(errorCode.getHttpStatus())
+                .body(ErrorResponse.of(errorCode, fieldErrors));
     }
 
     // 그 외 모든 예외 처리
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleUnknown(Exception e) {
+        ErrorCode errorCode = GlobalErrorCode.INTERNAL_SERVER_ERROR;
         return ResponseEntity
-                .status(ErrorCode.INTERNAL_SERVER_ERROR.getHttpStatus())
-                .body(ErrorResponse.of(ErrorCode.INTERNAL_SERVER_ERROR, e.getMessage()));
+                .status(errorCode.getHttpStatus())
+                .body(ErrorResponse.of(errorCode));
     }
 
 }

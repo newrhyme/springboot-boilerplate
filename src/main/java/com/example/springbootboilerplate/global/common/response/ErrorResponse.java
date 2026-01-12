@@ -13,7 +13,7 @@ public class ErrorResponse {
     private final Object errors;
     private final OffsetDateTime timestamp;
 
-    private ErrorResponse(String code, String message, Object errors) {
+    public ErrorResponse(String code, String message, Object errors) {
         this.code = code;
         this.message = message;
         this.errors = errors;

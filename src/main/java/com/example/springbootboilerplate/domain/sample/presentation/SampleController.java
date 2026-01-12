@@ -1,6 +1,7 @@
 package com.example.springbootboilerplate.domain.sample.presentation;
 
 import com.example.springbootboilerplate.global.common.code.ErrorCode;
+import com.example.springbootboilerplate.global.common.code.GlobalErrorCode;
 import com.example.springbootboilerplate.global.common.code.SuccessCode;
 import com.example.springbootboilerplate.global.common.response.ApiResponse;
 import com.example.springbootboilerplate.global.exception.CustomException;
@@ -25,6 +26,6 @@ public class SampleController {
 
     @GetMapping("/error")
     public ApiResponse<Void> error() {
-        throw new CustomException(ErrorCode.INVALID_REQUEST);
+        throw new CustomException(GlobalErrorCode.INVALID_REQUEST);
     }
 }
